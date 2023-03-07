@@ -170,6 +170,7 @@ def click_btn():
             for i in range(len(hinto2)):
                 hinto2[i].place_forget()
                 hinto3[i].place_forget()
+        canvas.delete("P_I")
         canvas.delete("MYCHR")
         gazou_gameclear1=tkinter.PhotoImage(file="text_gameclear_e.png")
         canvas.create_image(400,250, image=gazou_gameclear1, tag="CLEAR")
@@ -188,6 +189,7 @@ def yarinaosi():
     global gazou_chara,map,key,px,py,flag2,kotae,hi
     fl=0
     if key == "Return" and fl == 0:
+        canvas.delete("P_I")
         for y in range(7):
             for x in range(10):
                 if map[y][x] == 1:
@@ -195,6 +197,7 @@ def yarinaosi():
         kotae=tango[random.randrange(0,30)]
         print("正解:"+kotae)
         px,py=place()
+        canvas.create_rectangle(150+px*50,100+py*50,189+px*50,139+py*50, fill="yellow", tag="P_I")
         canvas.create_image(170+px*50,120+py*50, image=gazou_chara, tag="MYCHR")
         for i in range(5):
             hinto_x,hinto_y=place()
@@ -255,8 +258,9 @@ def main_proc():
         flag += 1
         flag3 = 1
         hi2 += 1
-        
+    
     canvas.coords("MYCHR", 170+px*50,120+py*50)
+    canvas.coords("P_I",150+px*50,100+py*50,189+px*50,139+py*50)
     
     #爆弾の座標と猫の座標が一致した際、ゲームオーバー処理を行う(Enterキーを押すと、やり直し処理をスタートさせる)
     if [px,py] in jirai and flag2 == 0:
@@ -303,8 +307,7 @@ gazou_titlehaikei=tkinter.PhotoImage(file="title capcha.png")
 canvas.create_image(600,300, image=gazou_titlehaikei, tag="TITLE")
 gazou_titleface=tkinter.PhotoImage(file="catsiro.png")
 canvas.create_image(450,370, image=gazou_titleface, tag="FACE")
-gazou_rulu_haikei=tkinter.PhotoImage(file="cat_rulu2.png")
-gazou_rulu_sousa=tkinter.PhotoImage(file="cat_sousa.png")
+gazou_rulu_haikei=tkinter.PhotoImage(file="cat_rulusin.png")
 rulu_sousa = tkinter.Label(root, text="マウスをクリックするか、Enterキーを押して次の画面へ",
                            font=("HGS創英角ﾎﾟｯﾌﾟ体",16),bg="snow",fg="salmon")
 title_annnnai = tkinter.Label(root, text="マウスをクリックするか、上下の矢印キーで猫を動かしてEnterキーを押してね",
@@ -345,12 +348,6 @@ def game_main():
                 root.destroy()
         if  (key == "Return" and flag4 == 1) or (mouse_y != "" and flag4 == 1):
             canvas.delete("RULE")
-            canvas.create_image(600,300, image=gazou_rulu_sousa, tag="SOUSA")
-            flag4 = 2
-            key =""
-            mouse_y = ""
-        if  (key == "Return" and flag4 == 2) or (mouse_y != "" and flag4 == 2):
-            canvas.delete("SOUSA")
             gazou_titlehaikei=tkinter.PhotoImage(file="title capcha.png")
             canvas.create_image(600,300, image=gazou_titlehaikei, tag="TITLE")
             gazou_titleface=tkinter.PhotoImage(file="catsiro.png")
@@ -398,6 +395,7 @@ def game_main():
 
         gazou_chara=tkinter.PhotoImage(file="cat2.png")
         px,py=place()
+        canvas.create_rectangle(150+px*50,100+py*50,189+px*50,139+py*50, fill="yellow", tag="P_I")
         canvas.create_image(170+px*50,120+py*50, image=gazou_chara, tag="MYCHR")
 
         for i in range(5):
