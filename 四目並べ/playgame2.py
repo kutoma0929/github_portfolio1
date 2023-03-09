@@ -207,6 +207,10 @@ def hantei(ko):
             if masu[v][i] == 0 and (flag<ko and flag2<ko):
                 flag=0
                 flag2=0
+            if ko==3 and flag==3 and ((i != 4 and masu[v][i+1] == 2) or (i >= 3  and masu[v][i-3] == 2)):
+                flag=0
+            if ko==3 and flag2==3 and ((i != 4 and masu[v][i+1] == 1) or (i >= 3  and masu[v][i-3] == 1)):
+                flag2=0
         if ko==3 and ((flag4==1 and flag2>=3) or (flag>=3 and flag3==1)):
             kati = 0
         elif flag>=ko:
@@ -230,6 +234,10 @@ def hantei(ko):
                 flag3=1
             if masu[i][v] == 0 and (flag<ko and flag2<ko):
                 flag=0
+                flag2=0
+            if ko==3 and flag==3 and ((i != 4 and masu[i+1][v] == 2) or (i >= 3  and masu[i-3][v] == 2)):
+                flag=0
+            if ko==3 and flag2==3 and ((i != 4 and masu[i+1][v] == 1) or (i >= 3  and masu[i-3][v] == 1)):
                 flag2=0
         if ko==3 and ((flag4==1 and flag2>=3) or (flag>=3 and flag3==1)):
             kati = 0
@@ -267,6 +275,10 @@ def hantei(ko):
             if masu[s1+v][s2+v] == 0 and (flag<ko and flag2<ko):
                 flag=0
                 flag2=0
+            if ko==3 and flag==3 and (((s1+v != 4 and s2+v != 4) and masu[s1+v+1][s2+v+1] == 2) or ((s1+v >= 3 and s2+v >= 3) and masu[s1+v-3][s2+v-3] == 2)):
+                flag=0
+            if ko==3 and flag2==3 and (((s1+v != 4 and s2+v != 4) and masu[s1+v+1][s2+v+1] == 1) or ((s1+v >= 3 and s2+v >= 3) and masu[s1+v-3][s2+v-3] == 1)):
+                flag2=0
         if ko==3 and ((flag4==1 and flag2>=3) or (flag>=3 and flag3==1)):
             kati = 0
         elif flag>=ko:
@@ -302,6 +314,10 @@ def hantei(ko):
                 flag3=1
             if masu[s1+v][s2-v] == 0 and (flag<ko and flag2<ko):
                 flag=0
+                flag2=0
+            if ko==3 and flag==3 and (((s1+v != 4 and s2-v != 0) and masu[s1+v+1][s2-v-1] == 2) or ((s1+v >= 3 and s2-v < 2) and masu[s1+v-3][s2-v+3] == 2)):
+                flag=0
+            if ko==3 and flag2==3 and (((s1+v != 4 and s2-v != 0) and masu[s1+v+1][s2-v-1] == 1) or ((s1+v >= 3 and s2-v < 2) and masu[s1+v-3][s2-v+3] == 1)):
                 flag2=0
         if ko==3 and ((flag4==1 and flag2>=3) or (flag>=3 and flag3==1)):
             kati = 0
