@@ -30,7 +30,7 @@ masu_k=4
 kiroku=[]
 kiroku2=[]
 kati_kiroku=[]
-MONTE=[100,180,180,240,240,300,300]
+MONTE=[100,180,180,200,200,300,300]
 ban_switch=0
 assist=0
 level=-1
@@ -567,20 +567,19 @@ def computer_teban():
                     if wh_c > bl_c:
                         kati_kiroku[i] = int(kati_kiroku[i])+1
                     save_road("road")
-        print(MONTE[masu_k//10])
-        print(kati_kiroku)
-        dec=kati_kiroku.index(max(kati_kiroku))
-        kati_kiroku.clear()        
-        masu_k+=1
-        cy=kiroku[dec][1]
-        cx=kiroku[dec][0]
-        board[cy][cx]="white"
-        isiuti(cx,cy,"white","uti")
-        hyo_gage=tyu_hyouka(cx,cy,"black","gage")
-        banmen(hyo_gage)
-        kiroku.clear()
+            dec=kati_kiroku.index(max(kati_kiroku))
+            kati_kiroku.clear()        
+            masu_k+=1
+            cy=kiroku[dec][1]
+            cx=kiroku[dec][0]
+            board[cy][cx]="white"
+            isiuti(cx,cy,"white","uti")
+            hyo_gage=tyu_hyouka(cx,cy,"black","gage")
+            banmen(hyo_gage)
+            kiroku.clear()
     
     elif level==4:
+        flag=0
         for y in range(8):
             for x in range(8):
                 if isiuti(x,y,"white","try") != None:
@@ -588,7 +587,8 @@ def computer_teban():
                     if (y==0 and x==0) or (y==0 and x==7) or (y==7 and x==0) or (y==7 and x==7):
                         cy=y
                         cx=x
-        if cy == -1 and cx == -1 and len(kiroku) != 0:
+                        flag=1
+        if flag==0 and len(kiroku) != 0:
             for i in range(len(kiroku)):
                 save_road("save")
                 for i2 in range(8):
@@ -602,16 +602,17 @@ def computer_teban():
                 for i2 in range(8):
                     for i3 in range(8):
                         kaihou[i2][i3]=kaihou_kiroku[i2][i3]
-            dec=kati_kiroku.index(min(kati_kiroku))
-            kati_kiroku.clear()
-            cy=kiroku[dec][0]
-            cx=kiroku[dec][1]
-        masu_k+= 1
-        board[cy][cx]="white"
-        isiuti(cx,cy,"white","uti")
-        hyo_gage=tyu_hyouka(cx,cy,"black","gage")
-        banmen(hyo_gage)
-        kiroku.clear()
+                dec=kati_kiroku.index(min(kati_kiroku))
+                kati_kiroku.clear()
+                cy=kiroku[dec][0]
+                cx=kiroku[dec][1]
+        if flag==1 or len(kiroku) != 0:
+            masu_k+= 1
+            board[cy][cx]="white"
+            isiuti(cx,cy,"white","uti")
+            hyo_gage=tyu_hyouka(cx,cy,"black","gage")
+            banmen(hyo_gage)
+            kiroku.clear()
         
     for y in range(8):
         for x in range(8):
