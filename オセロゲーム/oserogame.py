@@ -513,6 +513,7 @@ def computer_teban():
     cy=-1
     cx=-1
     flag=0
+    flag2=0
     p=0
     if level==1:
         for y in range(8):
@@ -528,6 +529,8 @@ def computer_teban():
             isiuti(cx,cy,"white","uti")
             hyo_gage=tyu_hyouka(cx,cy,"black","gage")
             banmen(hyo_gage)
+        else:
+            flag2 = 1
             
     elif level==2:
         for y in range(8):
@@ -542,14 +545,36 @@ def computer_teban():
             isiuti(cx,cy,"white","uti")
             hyo_gage=tyu_hyouka(cx,cy,"black","gage")
             banmen(hyo_gage)
+        else:
+            flag2 = 1
             
     
     elif level==3:
+        flag=0
         for y in range(8):
             for x in range(8):
                 if isiuti(x,y,"white","try") != None:
                     kiroku.append([x,y])
-        if len(kiroku) != 0:
+                    if (y==0 and x==0) or (y==0 and x==7) or (y==7 and x==0) or (y==7 and x==7):
+                        cy=y
+                        cx=x
+                        flag=1
+        #X打ちがある場合は除外
+        #X打ち以外の手がある事を確認する
+        flag2=0
+        for i in range(len(kiroku)):
+            if not (kiroku[i][0] == 1 and kiroku[i][1] == 6) or (kiroku[i][0] == 6 and kiroku[i][1] == 1) or\
+               (kiroku[i][0] == 1 and kiroku[i][1] == 1) or (kiroku[i][0] == 6 and kiroku[i][1] == 6):
+                   flag2==1
+        #X打ち以外の手がある時、X打ちは全て除外
+        if flag2==0:
+            for i in range(len(kiroku)):
+                if i >= len(kiroku):
+                    break
+                elif (kiroku[i][0] == 1 and kiroku[i][1] == 6) or (kiroku[i][0] == 6 and kiroku[i][1] == 1) or\
+                    (kiroku[i][0] == 1 and kiroku[i][1] == 1) or (kiroku[i][0] == 6 and kiroku[i][1] == 6):
+                   kiroku.pop(i)
+        if flag==0 and len(kiroku) != 0:
             for i in range(len(kiroku)):
                 kati_kiroku.append(0)
             for ka in range(MONTE[masu_k//10]):
@@ -569,14 +594,17 @@ def computer_teban():
                     save_road("road")
             dec=kati_kiroku.index(max(kati_kiroku))
             kati_kiroku.clear()        
-            masu_k+=1
             cy=kiroku[dec][1]
             cx=kiroku[dec][0]
+        if flag==1 or len(kiroku) != 0:
             board[cy][cx]="white"
             isiuti(cx,cy,"white","uti")
+            masu_k+=1
             hyo_gage=tyu_hyouka(cx,cy,"black","gage")
             banmen(hyo_gage)
             kiroku.clear()
+        else:
+            flag2 = 1
     
     elif level==4:
         flag=0
@@ -602,10 +630,10 @@ def computer_teban():
                 for i2 in range(8):
                     for i3 in range(8):
                         kaihou[i2][i3]=kaihou_kiroku[i2][i3]
-                dec=kati_kiroku.index(min(kati_kiroku))
-                kati_kiroku.clear()
-                cy=kiroku[dec][0]
-                cx=kiroku[dec][1]
+            dec=kati_kiroku.index(min(kati_kiroku))
+            kati_kiroku.clear()
+            cy=kiroku[dec][0]
+            cx=kiroku[dec][1]
         if flag==1 or len(kiroku) != 0:
             masu_k+= 1
             board[cy][cx]="white"
@@ -613,7 +641,9 @@ def computer_teban():
             hyo_gage=tyu_hyouka(cx,cy,"black","gage")
             banmen(hyo_gage)
             kiroku.clear()
-        
+        else:
+            flag2=1
+    #打てるマスを調べる 
     for y in range(8):
         for x in range(8):
             if isiuti(x,y,"black","try") != None:
@@ -624,10 +654,10 @@ def computer_teban():
         banmen(hyo_gage)
         cvs.coords("U_O",70+cx*70,70+cy*70,140+cx*70,140+cy*70)
     else:
-        if masu_k < 64:
+        if flag2==0 and masu_k < 64:
             root.after(500,computer_teban)
     
-    if masu_k >= 64:
+    if flag2==1 or masu_k >= 64:
         wh_c=0
         br_c=0
         for i in range(8):
