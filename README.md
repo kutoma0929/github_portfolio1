@@ -9,7 +9,7 @@
 
 「言葉を当てろ！宝探しゲーム！」→https://www.youtube.com/watch?v=ceY2-BWnrmQ
 
-「四目並べ」→(作成中)
+「四目並べ」→https://www.youtube.com/watch?v=qFmuDCV6hKQ
 
 「オセロゲーム」→(作成中)
 ### -言葉を当てろ！宝探しゲーム！  
