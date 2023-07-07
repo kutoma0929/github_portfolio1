@@ -657,7 +657,7 @@ def computer_teban():
         if flag2==0 and masu_k < 64:
             root.after(500,computer_teban)
     
-    if flag2==1 or masu_k >= 64:
+    if (flag==0 and flag2==1) or masu_k >= 64:
         wh_c=0
         br_c=0
         for i in range(8):
