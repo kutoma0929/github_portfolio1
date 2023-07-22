@@ -11,7 +11,7 @@
 
 「四目並べ」→https://www.youtube.com/watch?v=qFmuDCV6hKQ
 
-「オセロゲーム」→(作成中)
+「オセロゲーム」→https://www.youtube.com/watch?v=OUPSO5AsO3k
 ### -言葉を当てろ！宝探しゲーム！  
    ##### 作成時の目的
    pythonの基本的な文法やアルゴリズムを勉強したので、それらを活用し、何か作品が作りたいと思い、着手しました。 
